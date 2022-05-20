@@ -32,6 +32,7 @@ export default function Navbar() {
       <Dialog
         open={open}
         onClose={handleClose}
+        classes={{paper: classes.uploadDialogBox}}
       >
         <UploadDialogBox />
         <DialogActions>
