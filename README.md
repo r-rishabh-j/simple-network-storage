@@ -8,7 +8,6 @@ Install python deps and the build frontend app.
 
 1. Ensure server machine is connected to the router with a static private IP.
 2. Run ```./serve.sh``` in ```backend/``` to start the file server. Server starts on port 8000
-2. Determine the private IP of the server machine.
 
 ## Access the server on the client:
 1. Ensure client is connected to the same private network as the server.
