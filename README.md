@@ -2,7 +2,8 @@
 Dead simple file storage app over a private network. Store and share files rapidly over the local network without using any cloud service.
 
 ### Build 
-Install python deps and the build frontend app.
+Implemented using Flask and React.js
+Install python given in ```backend/requirements.txt``` and the build frontend app in ```frontend/```.
 
 ## Server configuration:
 
