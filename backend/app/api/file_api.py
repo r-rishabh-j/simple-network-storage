@@ -9,7 +9,7 @@ from .. import filemanager
 class GetSetFile(Resource):
     def post(self):
         """
-        Route to send a file
+        Route to send files, supports multiple file uploads
         """
         uploads = request.files
         keys = uploads.keys()
