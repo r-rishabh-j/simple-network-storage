@@ -4,7 +4,7 @@ from flask import request, abort, jsonify
 from ..models import db
 from ..models.file import FileStore
 from .. import filemanager
-
+import os
 
 class GetSetFile(Resource):
     def post(self):
@@ -35,8 +35,10 @@ class GetSetFile(Resource):
         except:
             abort(400, error='invalid argument')
         db_row: FileStore = FileStore.query.get(file_id)
+        print(db_row.filepath)
         if db_row == None:
             abort(400, error='no such file')
+        return {'path': os.path.normpath(db_row.filepath)}
         return filemanager.sendFile(db_row.filepath, db_row.filename)
 
 

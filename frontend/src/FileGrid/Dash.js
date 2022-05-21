@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { DataGrid, GridToolbar } from "@mui/x-data-grid"
+import { DataGrid, GridRowEditStartReasons, GridToolbar } from "@mui/x-data-grid"
 import { Button, Grid, Paper } from '@mui/material';
 import axios from 'axios';
 import { Box } from '@mui/system';
@@ -29,15 +29,10 @@ const Dash = () => {
                 id: file_id
             },
             headers: { "Content-type": "application/json" },
-            responseType: "blob",
         })
             .then((response) => {
-                var blob = new Blob([response.data], { type: response.data.type });
-                var url = window.URL.createObjectURL(blob, { oneTimeOnly: true });
-                var anchor = document.createElement('a');
-                anchor.href = url;
-                anchor.target = '_blank';
-                anchor.click();
+                console.log(response.data);
+                window.open(response.data.path);
             })
             .catch((error) => {
                 if (error.response) {

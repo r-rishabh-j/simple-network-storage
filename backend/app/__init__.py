@@ -1,17 +1,18 @@
 import os
 from flask_restful import Api
 from flask_cors import CORS
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 from .file_manager.local_file_manager import LocalFileManager
 from .models import db
 from dotenv import load_dotenv
 
 load_dotenv()
+UPLOAD_FOLDER = 'uploads'
 
-if not os.path.exists('./uploads'):
-    os.mkdir('./uploads')
+if not os.path.exists(UPLOAD_FOLDER):
+    os.mkdir(UPLOAD_FOLDER)
 
-filemanager = LocalFileManager('./uploads')
+filemanager = LocalFileManager('uploads')
 
 """
 Entrypoint of the app
@@ -25,6 +26,9 @@ def create_app(db_path='sqlite:///database.db'):
         CORS(app)
     app.config['SQLALCHEMY_DATABASE_URI'] = db_path
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    norm = os.path.normpath(UPLOAD_FOLDER)
+    print(norm)
+    app.config['UPLOAD_FOLDER'] = norm
 
     db.init_app(app)
     create_database(app)
@@ -39,6 +43,10 @@ def create_app(db_path='sqlite:///database.db'):
     @app.route('/', methods=['GET'])
     def home():
         return render_template('index.html')
+
+    @app.route(f'/{app.config["UPLOAD_FOLDER"]}/<path:filename>', methods=['GET'])
+    def file(filename):
+        return send_from_directory(os.path.abspath(app.config['UPLOAD_FOLDER']) ,filename, as_attachment=True)
 
     return app
 
