@@ -39,7 +39,6 @@ class GetSetFile(Resource):
         if db_row == None:
             abort(400, error='no such file')
         return {'path': os.path.normpath(db_row.filepath)}
-        return filemanager.sendFile(db_row.filepath, db_row.filename)
 
 
 class FetchFiles(Resource):
