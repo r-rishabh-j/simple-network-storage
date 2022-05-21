@@ -77,7 +77,7 @@ const Dash = () => {
             <div
                 title={cellValues.formattedValue}
                 style={{
-                    overflow: "scroll",
+                    overflow: "auto"
                 }}
             >
                 {cellValues.formattedValue}
@@ -93,7 +93,7 @@ const Dash = () => {
     const timeElement = (cellValues) => {
         const time = formatDate(cellValues.formattedValue);
         return (
-            <div title={time} style={{ overflow: "scroll"}} align="right">
+            <div title={time} style={{ overflow: "auto"}} align="right">
                 {time}
             </div>
         );
